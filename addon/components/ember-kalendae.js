@@ -91,6 +91,7 @@ export default Component.extend({
     kalendae.subscribe('change', this.didChange.bind(this));
     kalendae.subscribe('view-changed', this.didViewChanged.bind(this));
     kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
+    this.pushInstanceAPI(kalendae);
   },
 
   /**
@@ -136,6 +137,20 @@ export default Component.extend({
   },
 
   /**
+   * Pushes current instance of kalendae thorough instance API
+   *
+   * @method pushInstanceAPI
+   * @param Object kalendae
+   */
+  pushInstanceAPI(kalendae) {
+    const instanceAPI = this.get('instanceAPI');
+
+    if (typeOf(instanceAPI) === 'function') {
+      instanceAPI(kalendae);
+    }
+  },
+
+  /**
    * Removes kalendae subscriptions
    *
    * @protected
@@ -145,6 +160,12 @@ export default Component.extend({
     this.tearDownSubscriptions(this.get('kalendae'));
 
     this._super(...arguments);
+
+    const instanceAPI = this.get('instanceAPI');
+
+    if (typeOf(instanceAPI) === 'function') {
+      instanceAPI(null);
+    }
   },
 
   /**
