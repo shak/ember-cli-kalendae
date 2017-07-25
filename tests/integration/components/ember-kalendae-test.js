@@ -6,10 +6,43 @@ moduleForComponent('ember-kalendae', 'Integration | Component | ember kalendae',
 });
 
 test('it allows block usage', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ember-kalendae}}
       template block text
     {{/ember-kalendae}}
   `);
   assert.ok(this.$().text().trim().indexOf('template block text') >= 0);
+});
+
+test('it initialises correctly without any config', function(assert) {
+  assert.expect(1);
+
+  this.set('kalendae', null);
+  this.render(hbs`{{ember-kalendae instanceAPI=(action (mut kalendae))}}`);
+
+  // it should initialise to today
+  assert.equal(
+    this.get('kalendae').getSelected(),
+    new Date().toISOString().slice(0,10)
+  );
+});
+
+test('it passes mode through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('mode', 'range');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      mode=mode
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.mode,
+    this.get('mode')
+  );
 });
