@@ -45,6 +45,22 @@ test('it triggers date changed event correctly and passes the selected date thro
   TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
 });
 
+test('it triggers changed event correctly and passes the selected date through', function(assert) {
+  assert.expect(1);
+
+  this.set('onDidChange', (date) => {
+    const expected = this.$().find('.k-active:first').data('date');
+
+    assert.equal(
+      date.format('YYYY-MM-DD'),
+      expected
+    );
+  });
+
+  this.render(hbs`{{ember-kalendae onDidChange=(action onDidChange)}}`);
+  TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
+});
+
 test('it passes mode through to kalendae correctly', function(assert) {
   assert.expect(1);
 
