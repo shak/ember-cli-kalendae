@@ -101,3 +101,20 @@ test('it passes direction through to kalendae correctly', function(assert) {
   );
 });
 
+test('it passes directionScrolling through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('directionScrolling', false);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      directionScrolling=directionScrolling
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.directionScrolling,
+    this.get('directionScrolling')
+  );
+});
