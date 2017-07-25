@@ -227,6 +227,23 @@ test('it passes useYearNav through to kalendae correctly', function(assert) {
   );
 });
 
+test('it passes side through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('side', 'top');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      side=side
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.side,
+    this.get('side')
+  );
+});
 
 
 
