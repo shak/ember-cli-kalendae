@@ -154,3 +154,21 @@ test('it passes viewStartDate through to kalendae correctly', function(assert) {
     this.get('viewStartDate')
   );
 });
+
+test('it passes dateClassMap through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('dateClassMap', { foo: 'bar' });
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      dateClassMap=dateClassMap
+    }}`
+  );
+
+  assert.deepEqual(
+    this.get('kalendae').settings.dateClassMap,
+    this.get('dateClassMap')
+  );
+});
