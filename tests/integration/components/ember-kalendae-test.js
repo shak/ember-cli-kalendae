@@ -82,6 +82,20 @@ test('it triggers changed event correctly and passes all the selected dates thro
   TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
 });
 
+test('it triggers view changed event correctly and passes new view through', function(assert) {
+  assert.expect(1);
+
+  this.set('onDidViewChanged', (view) => {
+    assert.equal(
+      view,
+      'next-month'
+    );
+  });
+
+  this.render(hbs`{{ember-kalendae onDidViewChanged=(action onDidViewChanged)}}`);
+  TriggerEvent(this.$().find('.k-btn-next-month')[0], 'mousedown');
+});
+
 test('it passes mode through to kalendae correctly', function(assert) {
   assert.expect(1);
 
