@@ -9,7 +9,7 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     const options = typeof app.options === 'object' ? app.options : {};
-    const config = options['emberCLIKalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true };
+    const config = options['emberCLIKalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true, includeStyles: true };
     if (config.includeKalendae) {
       const kalendaePath = path.join(this.app.project.root, 'node_modules', 'kalendae', 'build');
 
@@ -24,8 +24,10 @@ module.exports = {
       }
     }
 
-    // include the css from vendor where it has already been exported to
-    app.import(path.join('vendor/kalendae.css'));
+    if (config.includeStyles) {
+      // include the css from vendor where it has already been exported to
+      app.import(path.join('vendor/kalendae.css'));
+    }
   },
 
   treeForStyles() {
