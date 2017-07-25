@@ -7,5 +7,11 @@ module.exports = {
   ],
   launch_in_dev: [
     'Chrome'
-  ]
+  ],
+  browser_args: {
+    'Chrome': [
+      '--headless',
+      '--disable-gpu'
+    ]
+  }
 };
