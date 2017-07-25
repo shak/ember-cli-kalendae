@@ -116,7 +116,7 @@ export default Component.extend({
     const onDidChange = this.get('onDidChange');
 
     if (typeOf(onDidChange) === 'function') {
-      onDidChange(date);
+      onDidChange(date, this.get('kalendae').getSelectedRaw());
     }
   },
 
