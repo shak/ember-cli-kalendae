@@ -64,3 +64,21 @@ test('it passes months through to kalendae correctly', function(assert) {
     this.get('months')
   );
 });
+
+test('it passes weekStart through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('weekStart', '2');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      weekStart=weekStart
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.weekStart,
+    this.get('weekStart')
+  );
+});
