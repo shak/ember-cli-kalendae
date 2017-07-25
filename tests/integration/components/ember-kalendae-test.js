@@ -209,6 +209,24 @@ test('it passes dayHeaderClickable through to kalendae correctly', function(asse
   );
 });
 
+test('it passes useYearNav through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('useYearNav', false);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      useYearNav=useYearNav
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.useYearNav,
+    this.get('useYearNav')
+  );
+});
+
 
 
 
