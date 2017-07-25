@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
+import { computed } from '@ember/object';
 import layout from '../templates/components/ember-kalendae';
 
 export default Component.extend({
@@ -25,6 +26,24 @@ export default Component.extend({
   rangeDelimiter: ' - ',
   multipleDelimiter: ', ',
   selected: new Date(),
+
+  /**
+   * Returns current kalendae instance
+   *
+   * @property kalendae
+   * @type Object | undefined Returns undefined if kalendae not found
+   */
+  kalendae: computed({
+    get() {
+      return this.$().data('kalendae');
+    }
+  }).volatile(),
+
+  init() {
+    this._super(...arguments);
+
+    scheduleOnce('afterRender', this, 'initKalendae')
+  },
 
   /**
    * Setups and initialises kalendae
