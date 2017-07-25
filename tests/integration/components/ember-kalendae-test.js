@@ -136,3 +136,21 @@ test('it passes blackout through to kalendae correctly', function(assert) {
     this.get('blackout')
   );
 });
+
+test('it passes viewStartDate through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('viewStartDate', '20170725T132629Z');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      viewStartDate=viewStartDate
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.viewStartDate,
+    this.get('viewStartDate')
+  );
+});
