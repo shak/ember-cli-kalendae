@@ -89,6 +89,7 @@ export default Component.extend({
    */
   buildSubscriptions(kalendae) {
     kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
+    kalendae.subscribe('change', this.didChange.bind(this));
   },
 
   /**
@@ -102,6 +103,20 @@ export default Component.extend({
 
     if (typeOf(onDateClicked) === 'function') {
       onDateClicked(date);
+    }
+  },
+
+  /**
+   * callback for `change` event
+   *
+   * @method didChange
+   * @param Object date
+   */
+  didChange(date) {
+    const onDidChange = this.get('onDidChange');
+
+    if (typeOf(onDidChange) === 'function') {
+      onDidChange(date);
     }
   },
 
@@ -125,5 +140,6 @@ export default Component.extend({
    */
   tearDownSubscriptions(kalendae) {
     kalendae.unsubscribe('date-clicked', this.didDateClicked.bind(this));
+    kalendae.unsubscribe('change', this.didChange.bind(this));
   }
 });
