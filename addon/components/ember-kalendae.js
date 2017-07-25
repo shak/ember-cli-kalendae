@@ -76,11 +76,43 @@ export default Component.extend({
         'selected'
       )
     );
+
+    this.buildSubscriptions(this.get('kalendae'));
   },
 
-  init() {
-    this._super(...arguments);
+  /**
+   * Registers event callbacks with Kalendae
+   *
+   * @method buildSubscriptions
+   * @param Object kalendae Kalendae instance
+   */
+  buildSubscriptions(kalendae) {
+    kalendae.subscribe('change', this.didChange.bind(this));
+    kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
+    kalendae.subscribe('view-changed', this.didViewChanged.bind(this));
+  },
 
-    scheduleOnce('afterRender', this, 'initKalendae')
+  /**
+   * Removes kalendae subscriptions
+   *
+   * @protected
+   * @method willDestroyElement
+   */
+  willDestroyElement() {
+    this.tearDownSubscriptions(this.get('kalendae'));
+
+    this._super(...arguments);
+  },
+
+  /**
+   * Removes event callbacks previously registered with Kalendae
+   *
+   * @method tearDownSubscriptions
+   * @param Object kalendae Kalendae instance
+   */
+  tearDownSubscriptions(kalendae) {
+    kalendae.unsubscribe('change', this.didChange.bind(this));
+    kalendae.unsubscribe('date-clicked', this.didDateClicked.bind(this));
+    kalendae.unsubscribe('view-changed', this.didViewChanged.bind(this));
   }
 });
