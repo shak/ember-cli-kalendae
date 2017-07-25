@@ -5,11 +5,17 @@ var Funnel = require('broccoli-funnel');
 // see https://github.com/miguelcobain/ember-leaflet/blob/master/index.js
 module.exports = {
   name: 'ember-cli-kalendae',
+  getConfig(app) {
+    const options = typeof app.options === 'object' ? app.options : {};
+
+    return options['emberCLIKalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true, includeStyles: true };
+  },
+
   included(app) {
     this._super.included.apply(this, arguments);
 
-    const options = typeof app.options === 'object' ? app.options : {};
-    const config = options['emberCLIKalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true };
+    const config = this.getConfig(app);
+
     if (config.includeKalendae) {
       const kalendaePath = path.join(this.app.project.root, 'node_modules', 'kalendae', 'build');
 
@@ -24,14 +30,20 @@ module.exports = {
       }
     }
 
-    // include the css from vendor where it has already been exported to
-    app.import(path.join('vendor/kalendae.css'));
+    if (config.includeStyles) {
+      // include the css from vendor where it has already been exported to
+      app.import(path.join('vendor/kalendae.css'));
+    }
   },
 
   treeForStyles() {
-    return new Funnel(path.join(this.app.project.root, 'node_modules', 'kalendae', 'build'), {
-      files: ['kalendae.css'],
-      destDir: 'vendor'
-    });
+    const config = this.getConfig(this.app);
+
+    if (config.includeStyles) {
+      return new Funnel(path.join(this.app.project.root, 'node_modules', 'kalendae', 'build'), {
+        files: ['kalendae.css'],
+        destDir: 'vendor'
+      });
+    }
   }
 };

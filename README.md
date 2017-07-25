@@ -4,6 +4,12 @@
 
 Ember CLI wrpper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
 
+## Installation
+
+```sh
+ember install ember-cli-kalendae
+```
+
 ## Setup
 
 This component allows build config to be set under `ember-cli-build`
@@ -15,7 +21,8 @@ let app = new EmberAddon(defaults, {
   emberCLIKalendae: {
     includeKalendae: true,
     includeMoment: true,
-    useStandalone: false
+    useStandalone: false,
+    includeStyles: true
   }
 });
 ```
@@ -34,9 +41,15 @@ let app = new EmberAddon(defaults, {
 
 * `useStandalone`
 
-  Finally, Kalendae ships with a standalone version which includes `moment.js`, to use standalone version, set `useStandalone` to `true`.
+  Kalendae ships with a standalone version which includes `moment.js`, to use standalone version, set `useStandalone` to `true`.
 
   By default `useStandalone` is set to `false`
+
+* `includeStyles`
+
+  Kalendae ships with a default theme, to exclude default theme, set `includeStyles` to `false`.
+
+  By default `includeStyles` is set to `true`
 
 ## Usage
 
@@ -47,7 +60,7 @@ This component supports all basic options [currently being offered by Kalendae](
 It also supports [all advance config options currently being offered by Kalendae](https://github.com/ChiperSoft/Kalendae#advanced-behavior-options)
 
 ```hbs
-{{ember-cli-kalendae mode="range" months=2}}
+{{ember-kalendae mode="range" months=2}}
 ```
 
 Will set the mode to `range` and display `2` calendar panes for months.
@@ -78,7 +91,7 @@ This component exposes all standard [Kalendae events](https://github.com/ChiperS
 For example:
 
 ```hbs
-{{ember-cli-kalendae onDateClicked=(action 'onDateClicked')}}
+{{ember-kalendae onDateClicked=(action 'onDateClicked')}}
 ```
 
 ```javascript
@@ -101,7 +114,7 @@ $(selector).data('kalendae')
 The component also allows the parent access to kalendae instance through instanceAPI.
 
 ```hbs
-{{ember-cli-kalendae instanceAPI=(action (mut kalendae))}}
+{{ember-kalendae instanceAPI=(action (mut kalendae))}}
 ```
 
 The controller will now get access to kalendae access on `kalendae` property.
@@ -109,9 +122,9 @@ The controller will now get access to kalendae access on `kalendae` property.
 The component also yields kalendae instance i.e.:
 
 ```hbs
-{{#ember-cli-kalendae as |kalendae|}}
+{{#ember-kalendae as |kalendae|}}
   ...
-{{/ember-cli-kalendae}}
+{{/ember-kalendae}}
 ```
 
 ## License
