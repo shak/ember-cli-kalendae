@@ -191,4 +191,24 @@ test('it passes dayOutOfMonthClickable through to kalendae correctly', function(
   );
 });
 
+test('it passes dayHeaderClickable through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('dayHeaderClickable', true);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      dayHeaderClickable=dayHeaderClickable
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.dayHeaderClickable,
+    this.get('dayHeaderClickable')
+  );
+});
+
+
+
 
