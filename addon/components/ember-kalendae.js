@@ -88,8 +88,9 @@ export default Component.extend({
    * @param Object kalendae Kalendae instance
    */
   buildSubscriptions(kalendae) {
-    kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
     kalendae.subscribe('change', this.didChange.bind(this));
+    kalendae.subscribe('view-changed', this.didViewChanged.bind(this));
+    kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
   },
 
   /**
@@ -121,6 +122,20 @@ export default Component.extend({
   },
 
   /**
+   * callback for `view-changed` event
+   *
+   * @method didViewChanged
+   * @param Object date
+   */
+  didViewChanged(view) {
+    const onDidViewChanged = this.get('onDidViewChanged');
+
+    if (typeOf(onDidViewChanged) === 'function') {
+      return onDidViewChanged(view);
+    }
+  },
+
+  /**
    * Removes kalendae subscriptions
    *
    * @protected
@@ -139,7 +154,8 @@ export default Component.extend({
    * @param Object kalendae Kalendae instance
    */
   tearDownSubscriptions(kalendae) {
-    kalendae.unsubscribe('date-clicked', this.didDateClicked.bind(this));
     kalendae.unsubscribe('change', this.didChange.bind(this));
+    kalendae.unsubscribe('view-changed', this.didViewChanged.bind(this));
+    kalendae.unsubscribe('date-clicked', this.didDateClicked.bind(this));
   }
 });
