@@ -9,9 +9,9 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     const options = typeof app.options === 'object' ? app.options : {};
-    const config = options['ember-cli-kalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true };
+    const config = options['emberCLIKalendae'] || { useStandalone: false, includeMoment: true, includeKalendae: true };
     if (config.includeKalendae) {
-      let kalendaePath = path.join(this.app.project.root, 'node_modules', 'kalendae', 'build');
+      const kalendaePath = path.join(this.app.project.root, 'node_modules', 'kalendae', 'build');
 
       if (config.includeMoment) {
         app.import(path.join(this.app.project.root, 'node_modules', 'moment', 'min', 'moment.min.js'));
