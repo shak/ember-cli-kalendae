@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
 import { computed } from '@ember/object';
-import { typeOf } from '@ember/utils';
+import isFunction from '../utils/is-function';
 import layout from '../templates/components/ember-kalendae';
 
 export default Component.extend({
@@ -109,7 +109,7 @@ export default Component.extend({
   didDateClicked(date) {
     const onDateClicked = this.get('onDateClicked');
 
-    if (typeOf(onDateClicked) === 'function') {
+    if (isFunction(onDateClicked)) {
       onDateClicked(date);
     }
   },
@@ -124,7 +124,7 @@ export default Component.extend({
   didChange(date) {
     const onDidChange = this.get('onDidChange');
 
-    if (typeOf(onDidChange) === 'function') {
+    if (isFunction(onDidChange)) {
       onDidChange(date, this.get('kalendae').getSelectedRaw());
     }
   },
@@ -139,7 +139,7 @@ export default Component.extend({
   didViewChanged(view) {
     const onDidViewChanged = this.get('onDidViewChanged');
 
-    if (typeOf(onDidViewChanged) === 'function') {
+    if (isFunction(onDidViewChanged)) {
       return onDidViewChanged(view);
     }
   },
@@ -154,7 +154,7 @@ export default Component.extend({
   pushInstanceAPI(kalendae) {
     const instanceAPI = this.get('instanceAPI');
 
-    if (typeOf(instanceAPI) === 'function') {
+    if (isFunction(instanceAPI)) {
       instanceAPI(kalendae);
     }
   },
@@ -172,7 +172,7 @@ export default Component.extend({
 
     const instanceAPI = this.get('instanceAPI');
 
-    if (typeOf(instanceAPI) === 'function') {
+    if (isFunction(instanceAPI)) {
       instanceAPI(null);
     }
   },
