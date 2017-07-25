@@ -281,3 +281,23 @@ test('it passes titleFormat through to kalendae correctly', function(assert) {
   );
 });
 
+test('it passes dayNumberFormat through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('dayNumberFormat', 'MMMM');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      dayNumberFormat=dayNumberFormat
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.dayNumberFormat,
+    this.get('dayNumberFormat')
+  );
+});
+
+
+
