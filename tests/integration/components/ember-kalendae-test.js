@@ -353,5 +353,23 @@ test('it passes rangeDelimiter through to kalendae correctly', function(assert) 
   );
 });
 
+test('it passes multipleDelimiter through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('multipleDelimiter', ',');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      multipleDelimiter=multipleDelimiter
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.multipleDelimiter,
+    this.get('multipleDelimiter')
+  );
+});
+
 
 
