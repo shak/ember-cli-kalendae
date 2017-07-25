@@ -18,7 +18,8 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.3.0"
+    "ember-cli-babel": "^6.3.0",
+    "kalendae": "^0.6.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
