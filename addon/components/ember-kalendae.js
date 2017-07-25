@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
 import { computed } from '@ember/object';
+import { typeOf } from '@ember/utils';
 import layout from '../templates/components/ember-kalendae';
 
 export default Component.extend({
@@ -87,9 +88,21 @@ export default Component.extend({
    * @param Object kalendae Kalendae instance
    */
   buildSubscriptions(kalendae) {
-    kalendae.subscribe('change', this.didChange.bind(this));
     kalendae.subscribe('date-clicked', this.didDateClicked.bind(this));
-    kalendae.subscribe('view-changed', this.didViewChanged.bind(this));
+  },
+
+  /**
+   * callback for `date-clicked` event
+   *
+   * @method didDateClicked
+   * @param Object date
+   */
+  didDateClicked(date) {
+    const onDateClicked = this.get('onDateClicked');
+
+    if (typeOf(onDateClicked) === 'function') {
+      onDateClicked(date);
+    }
   },
 
   /**
@@ -111,8 +124,6 @@ export default Component.extend({
    * @param Object kalendae Kalendae instance
    */
   tearDownSubscriptions(kalendae) {
-    kalendae.unsubscribe('change', this.didChange.bind(this));
     kalendae.unsubscribe('date-clicked', this.didDateClicked.bind(this));
-    kalendae.unsubscribe('view-changed', this.didViewChanged.bind(this));
   }
 });
