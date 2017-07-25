@@ -118,3 +118,21 @@ test('it passes directionScrolling through to kalendae correctly', function(asse
     this.get('directionScrolling')
   );
 });
+
+test('it passes blackout through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('blackout', '20170725T132629Z');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      blackout=blackout
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.blackout,
+    this.get('blackout')
+  );
+});
