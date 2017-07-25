@@ -299,5 +299,22 @@ test('it passes dayNumberFormat through to kalendae correctly', function(assert)
   );
 });
 
+test('it passes dayAttributeFormat through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('dayAttributeFormat', 'MMMM');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      dayAttributeFormat=dayAttributeFormat
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.dayAttributeFormat,
+    this.get('dayAttributeFormat')
+  );
+});
 
 
