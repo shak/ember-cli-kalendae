@@ -1,17 +1,21 @@
 {
   "name": "ember-cli-kalendae",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Ember CLI for the Kalendae JS Datepicker",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "kalendae",
+    "datepicker",
+    "ember-cli",
+    "date"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Shahrukh Omar",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/shak/ember-cli-kalendae",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
