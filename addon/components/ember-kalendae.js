@@ -40,6 +40,10 @@ export default Component.extend({
     }
   }).volatile(),
 
+  /**
+   * @protected
+   * @method init
+   */
   init() {
     this._super(...arguments);
 
@@ -84,6 +88,7 @@ export default Component.extend({
   /**
    * Registers event callbacks with Kalendae
    *
+   * @private
    * @method buildSubscriptions
    * @param Object kalendae Kalendae instance
    */
@@ -97,6 +102,7 @@ export default Component.extend({
   /**
    * callback for `date-clicked` event
    *
+   * @private
    * @method didDateClicked
    * @param Object date
    */
@@ -111,6 +117,7 @@ export default Component.extend({
   /**
    * callback for `change` event
    *
+   * @private
    * @method didChange
    * @param Object date
    */
@@ -125,6 +132,7 @@ export default Component.extend({
   /**
    * callback for `view-changed` event
    *
+   * @private
    * @method didViewChanged
    * @param Object date
    */
@@ -139,6 +147,7 @@ export default Component.extend({
   /**
    * Pushes current instance of kalendae thorough instance API
    *
+   * @private
    * @method pushInstanceAPI
    * @param Object kalendae
    */
@@ -171,6 +180,7 @@ export default Component.extend({
   /**
    * Removes event callbacks previously registered with Kalendae
    *
+   * @private
    * @method tearDownSubscriptions
    * @param Object kalendae Kalendae instance
    */
