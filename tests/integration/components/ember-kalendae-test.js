@@ -172,3 +172,23 @@ test('it passes dateClassMap through to kalendae correctly', function(assert) {
     this.get('dateClassMap')
   );
 });
+
+test('it passes dayOutOfMonthClickable through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('dayOutOfMonthClickable', true);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      dayOutOfMonthClickable=dayOutOfMonthClickable
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.dayOutOfMonthClickable,
+    this.get('dayOutOfMonthClickable')
+  );
+});
+
+
