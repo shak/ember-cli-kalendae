@@ -82,3 +82,22 @@ test('it passes weekStart through to kalendae correctly', function(assert) {
     this.get('weekStart')
   );
 });
+
+test('it passes direction through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('direction', 'past');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      direction=direction
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.direction,
+    this.get('direction')
+  );
+});
+
