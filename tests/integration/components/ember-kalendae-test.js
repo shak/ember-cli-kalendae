@@ -263,3 +263,21 @@ test('it passes columnHeaderFormat through to kalendae correctly', function(asse
   );
 });
 
+test('it passes titleFormat through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('titleFormat', 'MMMM');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      titleFormat=titleFormat
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.titleFormat,
+    this.get('titleFormat')
+  );
+});
+
