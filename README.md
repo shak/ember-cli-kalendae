@@ -4,6 +4,12 @@
 
 Ember CLI wrpper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
 
+## Installation
+
+```sh
+ember install ember-cli-kalendae
+```
+
 ## Setup
 
 This component allows build config to be set under `ember-cli-build`
