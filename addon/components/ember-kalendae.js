@@ -47,7 +47,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    scheduleOnce('afterRender', this, 'initKalendae')
+    scheduleOnce('afterRender', this, 'initKalendae');
   },
 
   /**
