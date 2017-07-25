@@ -335,5 +335,23 @@ test('it passes parseSplitDelimiter through to kalendae correctly', function(ass
   );
 });
 
+test('it passes rangeDelimiter through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('rangeDelimiter', '-');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      rangeDelimiter=rangeDelimiter
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.rangeDelimiter,
+    this.get('rangeDelimiter')
+  );
+});
+
 
 
