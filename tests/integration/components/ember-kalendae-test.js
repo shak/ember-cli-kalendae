@@ -5,6 +5,40 @@ moduleForComponent('ember-kalendae', 'Integration | Component | ember kalendae',
   integration: true
 });
 
+// taken from http://jsfiddle.net/mendesjuan/rHMCy/4/
+const fireEvent = function(node, eventName) {
+   if (node.dispatchEvent) {
+    // Gecko-style approach (now the standard) takes more work
+    let eventClass = "";
+
+    // Different events have different event classes.
+    // If this switch statement can't map an eventName to an eventClass,
+    // the event firing is going to fail.
+    switch (eventName) {
+      case 'click': // Dispatching of 'click' appears to not work correctly in Safari. Use 'mousedown' or 'mouseup' instead.
+      case 'mousedown':
+      case 'mouseup':
+        eventClass = 'MouseEvents';
+        break;
+
+      case 'focus':
+      case 'change':
+      case 'blur':
+      case 'select':
+        eventClass = 'HTMLEvents';
+        break;
+
+      default:
+        throw `fireEvent: Couldn't find an event class for event '${eventName}.`;
+    }
+    var event = node.ownerDocument.createEvent(eventClass);
+    event.initEvent(eventName, true, true); // All events created as bubbling and cancelable.
+    event.synthetic = true; // allow detection of synthetic events
+    // The second parameter says go ahead with the default action
+    node.dispatchEvent(event, true);
+  }
+};
+
 test('it allows block usage', function(assert) {
   assert.expect(1);
 
@@ -27,6 +61,21 @@ test('it initialises correctly without any config', function(assert) {
     this.get('kalendae').getSelected(),
     new Date().toISOString().slice(0,10)
   );
+});
+
+test('it triggers date changed event correctly and passes the selected date through', function(assert) {
+  assert.expect(1);
+
+  this.set('onDateClicked', (date) => {
+    const expected = this.$().find('.k-active:first').data('date');
+    assert.equal(
+      date.format('YYYY-MM-DD'),
+      expected
+    );
+  });
+
+  this.render(hbs`{{ember-kalendae onDateClicked=(action onDateClicked)}}`);
+  fireEvent(this.$().find('.k-active:first')[0], 'mousedown');
 });
 
 test('it passes mode through to kalendae correctly', function(assert) {
