@@ -371,5 +371,24 @@ test('it passes multipleDelimiter through to kalendae correctly', function(asser
   );
 });
 
+test('it passes selected through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('selected', null);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      selected=selected
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.selected,
+    this.get('selected')
+  );
+});
+
+
 
 
