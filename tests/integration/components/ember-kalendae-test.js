@@ -317,4 +317,23 @@ test('it passes dayAttributeFormat through to kalendae correctly', function(asse
   );
 });
 
+test('it passes parseSplitDelimiter through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('parseSplitDelimiter', null);
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      parseSplitDelimiter=parseSplitDelimiter
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.parseSplitDelimiter,
+    this.get('parseSplitDelimiter')
+  );
+});
+
+
 
