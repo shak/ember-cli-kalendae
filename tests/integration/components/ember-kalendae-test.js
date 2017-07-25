@@ -46,3 +46,21 @@ test('it passes mode through to kalendae correctly', function(assert) {
     this.get('mode')
   );
 });
+
+test('it passes months through to kalendae correctly', function(assert) {
+  assert.expect(1);
+
+  this.set('months', '2');
+
+  this.render(hbs`
+    {{ember-kalendae
+      instanceAPI=(action (mut kalendae))
+      months=months
+    }}`
+  );
+
+  assert.equal(
+    this.get('kalendae').settings.months,
+    this.get('months')
+  );
+});
