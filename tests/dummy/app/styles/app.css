@@ -4,6 +4,14 @@ header {
   text-align: center;
 }
 
+h3 {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px #ccc solid;
+  font-style: italic;
+  font-size: 20px;
+}
+
 .float-calendar {
   height: 0px;
   margin: 0px;
