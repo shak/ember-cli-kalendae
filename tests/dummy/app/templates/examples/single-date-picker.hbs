@@ -7,6 +7,7 @@
   <code>
 import Controller from '@ember/controller';
 export default Controller.extend({
+  selectedDate: new Date(), // set initial date selection to today
   actions: {
     onDidChange(date) {
       this.set('selectedDate', date); // save raw for use with Kalendae plugin
