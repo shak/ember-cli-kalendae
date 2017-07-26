@@ -1,0 +1,142 @@
+<h2>Single Date Selection With Date Restrictions</h2>
+<p>Kalendae can be configured to only allow start date to be greater than equal to today. The end date can also be restricted to be greater than equal to start date.</p>
+
+<p>The example below takes advantage of Kalendae's <code>blackout</code> and Ember's closured actions to achieve this behavior.</p>
+
+<h3>In Action</h3>
+<form>
+  <div class="inline-parent">
+    <fieldset class="inline-child">
+      <label>Start Date</label>
+      {{input
+        placeholder="Click to select start date"
+        focus-in=(action "showCalendar" "startDatePicker")
+        focus-out=(action "hideCalendar" "startDatePicker")
+        value=selectedStartDateFormatted
+        readonly=true
+        name="startDate"
+      }}
+      {{#if startDatePicker}}
+        {{ember-kalendae
+          onDidChange=(action "onStartDateDidChange")
+          selected=selectedStartDate
+          class="float-calendar"
+          blackout=(action "isStartDateBlocked")
+        }}
+      {{/if}}
+    </fieldset>
+
+    <fieldset class="inline-child">
+      <label>End Date</label>
+      {{input
+        placeholder="Click to select end date"
+        focus-in=(action "showCalendar" "endDatePicker")
+        focus-out=(action "hideCalendar" "endDatePicker")
+        value=selectedEndDateFormatted
+        readonly=true
+        name="endDate"
+      }}
+      {{#if endDatePicker}}
+        {{ember-kalendae
+          onDidChange=(action "onEndDateDidChange")
+          selected=selectedEndDate
+          class="float-calendar"
+          blackout=(action "isEndDateBlocked")
+        }}
+      {{/if}}
+    </fieldset>
+  </div>
+</form>
+
+<h3>Code Example</h3>
+{{#controller-code}}
+import Controller from '@ember/controller';
+import { next } from '@ember/runloop';
+
+export default Controller.extend({
+  selectedStartDate: new Date(),
+  selectedEndDate: new Date(),
+
+  isDateBefore(query, date) {
+    if (query.year() &lt; date.getFullYear()) {
+      return true;
+    }
+
+    if (query.month() &lt; date.getMonth()) {
+      return true;
+    }
+
+    if (query.date() &lt; date.getDate()) {
+      return true;
+    }
+
+    return false;
+  },
+
+  actions: {
+    isStartDateBlocked(date) {
+      return this.isDateBefore(date, new Date());
+    },
+
+    isEndDateBlocked(date) {
+      return this.isDateBefore(date, this.get('selectedStartDate'));
+    },
+
+    onStartDateDidChange(date) {
+      this.set('selectedStartDate', date.toDate());
+      this.set('selectedStartDateFormatted', date.format('do of MMMM YYYY'));
+      next(
+        () => {
+          this.set('selectedEndDate', this.get('selectedStartDate'));
+          this.set('selectedEndDateFormatted', this.get('selectedStartDateFormatted'));
+
+          this.send('hideCalendar', 'startDatePicker');
+        }
+      );
+    },
+
+    onEndDateDidChange(date) {
+      this.set('selectedEndDate', date.toDate());
+      this.set('selectedEndDateFormatted', date.format('do of MMMM YYYY'));
+      next(
+        () => {
+          this.send('hideCalendar', 'endDatePicker');
+        }
+      );
+    }
+  }
+});
+{{/controller-code}}
+{{#template-code}}
+...
+
+// start date picker
+\{{input
+  placeholder="Click to select start date"
+  value=selectedStartDateFormatted
+  readonly=true
+  name="startDate"
+}}
+\{{ember-kalendae
+  onDidChange=(action "onStartDateDidChange")
+  selected=selectedStartDate
+  class="float-calendar"
+  blackout=(action "isStartDateBlocked")
+}}
+
+// end date picker
+\{{input
+  placeholder="Click to select end date"
+  value=selectedEndDateFormatted
+  readonly=true
+  name="endDate"
+}}
+\{{ember-kalendae
+  onDidChange=(action "onEndDateDidChange")
+  selected=selectedEndDate
+  class="float-calendar"
+  blackout=(action "isEndDateBlocked")
+}}
+
+...
+{{/template-code}}

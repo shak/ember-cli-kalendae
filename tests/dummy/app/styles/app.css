@@ -16,9 +16,37 @@ h3 {
   font-size: 20px;
 }
 
+a.btn.active {
+  background-color: #d6d6d5;
+  color: #46462d;
+}
+
+.btn--group a.btn:hover {
+  background-color: #d6d6d5;
+  color: #46462d;
+  border-color: #c0c2c3;
+}
+
 .float-calendar {
   height: 0px;
   margin: 0px;
   padding: 0px;
   z-index: 10;
+}
+
+.code-example {
+  margin-bottom: 0.86em;
+}
+
+.code-example p {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.code-example pre {
+  margin-top: 0px;
+}
+
+.code-example code {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 }
