@@ -1,6 +1,7 @@
 # ember-cli-kalendae 
 
 [![Build Status](https://travis-ci.org/shak/ember-cli-kalendae.svg?branch=master)](https://travis-ci.org/shak/ember-cli-kalendae)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-kalendae.svg)](https://emberobserver.com/addons/ember-cli-kalendae)
 
 Ember CLI wrpper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
 
