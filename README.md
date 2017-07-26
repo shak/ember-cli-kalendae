@@ -5,6 +5,8 @@
 
 Ember CLI wrapper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
 
+## [Ember CLI Kalendae Demo](https://shak.github.io/ember-cli-kalendae)
+
 ## Table of Contents
 
 **Basic Information**
