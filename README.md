@@ -3,15 +3,34 @@
 [![Build Status](https://travis-ci.org/shak/ember-cli-kalendae.svg?branch=master)](https://travis-ci.org/shak/ember-cli-kalendae)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-kalendae.svg)](https://emberobserver.com/addons/ember-cli-kalendae)
 
-Ember CLI wrpper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
+Ember CLI wrapper for the excellent [Kalendae JS Datepicker](https://github.com/ChiperSoft/Kalendae).
 
-## Installation
+## Table of Contents
+
+**Basic Information**
+
+* [Installation](#installation)
+* [Setup](#setup)
+
+**Usage**
+
+* [Options](#options)
+* [Event Actions](#event-actions)
+  * [onDidChange](#ondidchange)
+  * [onDateClicked](#ondateclicked)
+  * [onDidViewChanged](#ondidviewchanged)
+* [Kalendae Instance](#kalendae-instance)
+* [License](#license)
+
+## Basic Information
+
+### Installation
 
 ```sh
 ember install ember-cli-kalendae
 ```
 
-## Setup
+### Setup
 
 This component allows build config to be set under `ember-cli-build`
 
@@ -28,29 +47,21 @@ let app = new EmberAddon(defaults, {
 });
 ```
 
-* `includeKalendae`
+#### `includeKalendae` (default: true)
 
-  This addon will attempt to install Kalendae to vendor unless told otherwise. To disable addon from adding Kalendae to your vendor i.e. when you already have Kalendae installed in your app and you don't want a duplicate, set `includeKalendae` to false.
+This addon will attempt to install Kalendae to vendor unless told otherwise. To disable addon from adding Kalendae to your vendor i.e. when you already have Kalendae installed in your app and you don't want a duplicate, set `includeKalendae` to false.
 
-  By default `includeKalendae` is set to `true`
+#### `includeMoment` (default: true)
 
-* `includeMoment`
+Kalendae has dependency on `moment.js`. If you already have `moment.js` globally available then set `includeMoment` to `false` to prevent moment being imported to vendor.
 
-  Kalendae has dependency on `moment.js`. If you already have `moment.js` globally available then set `includeMoment` to `false` to prevent moment being imported to vendor.
+#### `useStandalone` (default: false)
 
-  By default `includeMoment` is set to `true`
+Kalendae ships with a standalone version which includes `moment.js`, to use standalone version, set `useStandalone` to `true`.
 
-* `useStandalone`
+#### `includeStyles` (default: true)
 
-  Kalendae ships with a standalone version which includes `moment.js`, to use standalone version, set `useStandalone` to `true`.
-
-  By default `useStandalone` is set to `false`
-
-* `includeStyles`
-
-  Kalendae ships with a default theme, to exclude default theme, set `includeStyles` to `false`.
-
-  By default `includeStyles` is set to `true`
+Kalendae ships with a default theme, to exclude default theme, set `includeStyles` to `false`.
 
 ## Usage
 
@@ -58,7 +69,7 @@ let app = new EmberAddon(defaults, {
 
 This component supports all basic options [currently being offered by Kalendae](https://github.com/ChiperSoft/Kalendae#options).
 
-It also supports [all advance config options currently being offered by Kalendae](https://github.com/ChiperSoft/Kalendae#advanced-behavior-options)
+It also supports [all advance config options currently being offered by Kalendae](https://github.com/ChiperSoft/Kalendae#advanced-behavior-options).
 
 ```hbs
 {{ember-kalendae mode="range" months=2}}
@@ -66,34 +77,36 @@ It also supports [all advance config options currently being offered by Kalendae
 
 Will set the mode to `range` and display `2` calendar panes for months.
 
-### Events
+### Event Actions
 
 This component exposes all standard [Kalendae events](https://github.com/ChiperSoft/Kalendae#kalendae-events) as Ember actions.
 
-* `onDidChange`
+#### `onDidChange`
   
-  Triggered by Kalendae `change` event. The action is passed the following args:
+Triggered by Kalendae `change` event. The action is passed the following args:
   
-  * dateLastClicked (moment)
-  * selectedDates (Array)
+  * `dateLastClicked (moment)`
+  * `selectedDates (Array)`
 
-* `onDateClicked`
+#### `onDateClicked`
 
-  Triggered by Kalendae `date-clicked` event. The action is passed the following args:
+Triggered by Kalendae `date-clicked` event. The action is passed the following args:
   
-  * dateLastClicked (moment)
+  * `dateLastClicked (moment)`
 
-* `onDidViewChanged`
+#### `onDidViewChanged`
 
-  Triggered by Kalendae `view-changed` event. The action is passed the following args:
+Triggered by Kalendae `view-changed` event. The action is passed the following args:
   
-   * clickedButtonLabel (String)
+   * `clickedButtonLabel (String)`
 
-For example:
+Pass closured action into `ember-cli-kalendae` in the template.
 
 ```hbs
 {{ember-kalendae onDateClicked=(action 'onDateClicked')}}
 ```
+
+and define callback in your controller.
 
 ```javascript
 // controller
@@ -131,3 +144,4 @@ The component also yields kalendae instance i.e.:
 ## License
 
 ember-cli-kalendae is released under an MIT license and is freely distributable.
+
