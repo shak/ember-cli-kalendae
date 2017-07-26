@@ -1,0 +1,12 @@
+nav,
+header {
+  padding: 10px;
+  text-align: center;
+}
+
+.float-calendar {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  z-index: 10;
+}

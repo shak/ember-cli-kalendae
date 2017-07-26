@@ -1,0 +1,72 @@
+<h2>Single Date Selection</h2>
+<p>Kalendae can be configured to pick a single date from each instance. This can be used to pick a start and end date.</p>
+
+<p class="message message--positive"><b>controller</b></p>
+<pre>
+  <code>
+import Controller from '@ember/controller';
+export default Controller.extend({
+  actions: {
+    onDidChange(date) {
+      this.set('selectedDate', date); // save raw for use with Kalendae plugin
+      this.set('selectedFormatted', date.format('YYYY-MM-DD')); // format for display
+    }
+  }
+});
+  </code>
+</pre>
+<p class="message message--info"><b>template</b></p>
+<pre>
+  <code>
+...
+
+\{{input value=selectedFormatted}}
+\{{ember-kalendae
+  onDidChange=(action "onDidChange")
+  selected=selectedDate
+}}
+
+...
+  </code>
+</pre>
+<form>
+  <div class="inline-parent">
+    <fieldset class="inline-child">
+      <label>Start Date</label>
+      {{input
+        placeholder="Click to select start date"
+        focus-in=(action "showCalendar" "showCalendar1")
+        focus-out=(action "hideCalendar" "showCalendar1")
+        value=selectedValue1
+        readonly=true
+        name='calendar1'
+      }}
+      {{#if showCalendar1}}
+        {{ember-kalendae
+          onDidChange=(action "onDidChange1")
+          selected=selected1
+          class="float-calendar"
+        }}
+      {{/if}}
+    </fieldset>
+
+    <fieldset class="inline-child">
+      <label>End Date</label>
+      {{input
+        placeholder="Click to select end date"
+        focus-in=(action "showCalendar" "showCalendar2")
+        focus-out=(action "hideCalendar" "showCalendar2")
+        value=selectedValue2
+        readonly=true
+        name='calendar2'
+      }}
+      {{#if showCalendar2}}
+        {{ember-kalendae
+          onDidChange=(action "onDidChange2")
+          selected=selected2
+          class="float-calendar"
+        }}
+      {{/if}}
+    </fieldset>
+  </div>
+</form>
