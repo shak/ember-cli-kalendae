@@ -8,6 +8,10 @@ header {
   text-align: center;
 }
 
+h1 a {
+  text-decoration: none;
+}
+
 h3 {
   padding-top: 10px;
   padding-bottom: 5px;
@@ -49,4 +53,9 @@ a.btn.active {
 .code-example code {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
+}
+
+.kalendae {
+  border: 1px #c7c7c7 solid;
+  margin: 0px;
 }
