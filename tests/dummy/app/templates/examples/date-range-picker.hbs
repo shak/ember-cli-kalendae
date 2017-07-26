@@ -1,0 +1,58 @@
+<h2>Date Range</h2>
+<p>Kalendae can be configured to pick ranges.</p>
+
+<h3>In Action</h3>
+<form>
+  <div class="inline-parent">
+    <fieldset class="inline-child">
+      <label>Date Range</label>
+      {{input
+        placeholder="No date range selected"
+        value=selectedDateFormatted
+        readonly=true
+        name="dateRange"
+      }}
+      {{ember-kalendae
+        mode="range"
+        months=2
+        onDidChange=(action "onChange")
+        selected=selectedDate
+      }}
+    </fieldset>
+  </div>
+</form>
+
+<h3>Code Example</h3>
+{{#controller-code}}
+import Controller from '@ember/controller';
+
+export default Controller.extend({
+  actions: {
+    onChange(date, selected) {
+      if (selected.length > 1) {
+        return this.set('selectedDateFormatted', `${selected[0].format('do of MMMM YYYY')} to ${selected[1].format('do of MMMM YYYY')}`);
+      }
+
+      this.set('selectedDateFormatted', null);
+    }
+  }
+});
+{{/controller-code}}
+{{#template-code}}
+...
+
+\{{input
+  placeholder="No date range selected"
+  value=selectedDateFormatted
+  readonly=true
+  name="dateRange"
+}}
+\{{ember-kalendae
+  mode="range"
+  months=2
+  onDidChange=(action "onChange")
+  selected=selectedDate
+}}
+
+...
+{{/template-code}}

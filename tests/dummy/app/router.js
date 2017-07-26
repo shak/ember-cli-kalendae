@@ -7,6 +7,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('examples', function() {
+    this.route('single-date-picker');
+    this.route('single-date-picker-with-blackout');
+    this.route('date-range-picker');
+  });
 });
 
 export default Router;
