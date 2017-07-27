@@ -5,12 +5,12 @@
 <form>
   <div class="inline-parent">
     <fieldset class="inline-child">
-      <label>Date Range</label>
+      <label for="dateRange">Date Range</label>
       {{input
         placeholder="No date range selected"
         value=selectedDateFormatted
         readonly=true
-        name="dateRange"
+        id="dateRange"
       }}
       {{ember-kalendae
         mode="range"
@@ -30,7 +30,7 @@ export default Controller.extend({
   actions: {
     onChange(date, selected) {
       if (selected.length > 1) {
-        return this.set('selectedDateFormatted', `${selected[0].format('do of MMMM YYYY')} to ${selected[1].format('do of MMMM YYYY')}`);
+        return this.set('selectedDateFormatted', `${selected[0].format('Do of MMMM YYYY')} to ${selected[1].format('Do of MMMM YYYY')}`);
       }
 
       this.set('selectedDateFormatted', null);
@@ -45,7 +45,7 @@ export default Controller.extend({
   placeholder="No date range selected"
   value=selectedDateFormatted
   readonly=true
-  name="dateRange"
+  id="dateRange"
 }}
 \{{ember-kalendae
   mode="range"
