@@ -7,19 +7,7 @@ export default Controller.extend({
   selectedEndDate: new Date(),
 
   isDateBefore(query, date) {
-    if (query.year() < date.getFullYear()) {
-      return true;
-    }
-
-    if (query.month() < date.getMonth()) {
-      return true;
-    }
-
-    if (query.date() < date.getDate()) {
-      return true;
-    }
-
-    return false;
+    return query.toDate().getTime() < date.getTime();
   },
 
   actions: {
@@ -48,7 +36,7 @@ export default Controller.extend({
           this.set('selectedEndDateFormatted', this.get('selectedStartDateFormatted'));
 
           this.send('hideCalendar', 'startDatePicker');
-          jQuery('input[name="startDate"]').blur();
+          jQuery('#startDate').blur();
         }
       );
     },
@@ -59,7 +47,7 @@ export default Controller.extend({
       next(
         () => {
           this.send('hideCalendar', 'endDatePicker');
-          jQuery('input[name="endDate"]').blur();
+          jQuery('#endDate').blur();
         }
       );
     }
