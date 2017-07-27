@@ -1,6 +1,21 @@
 {
   "short_name": "CLIKalendae",
   "name": "Ember CLI Kalendae",
+  "description": "Ember CLI wrapper for Kalendae plugin",
+  "display": "standalone",
+  "start_url": ".",
   "background_color": "#f7f6f3",
-  "theme_color": "#d6d6d5"
+  "theme_color": "#ff7a4d",
+  "icons": [
+    {
+      "src": "/assets/img/tomster192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/tomster512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
