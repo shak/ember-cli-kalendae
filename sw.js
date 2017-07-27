@@ -1,0 +1,11 @@
+(function(){"use strict"
+function e(e,t){return caches.keys().then(function(n){n.forEach(function(n){var s=0===n.indexOf(e),c=n!==t
+s&&c&&caches.delete(n)})})}self.addEventListener("install",function(e){return self.skipWaiting()}),self.addEventListener("activate",function(e){return self.clients.claim()})
+var t=["assets/dummy-0bc5ad525d2c2304f2619bf4cc2980a8.js","assets/dummy-e0e2bd587dddab8835db3a0d6438da05.css","assets/img/github-a559fdecac53b2f4e131899dc1964e44.png","assets/img/tomster192-6ecc732c3146c58d846f49ac9ac23657.png","assets/img/tomster512-a870a740d0366e05908298a4850f1d8f.png","assets/img/twitter-0159a270af61a8d3aa269956db6787b7.png","assets/vendor-d3482d355c68b9d5c60600a03b4fa27d.js","assets/vendor-deb1b57d9c4b0fbed8e531b078dd6585.css"],n="esw-asset-cache-1",s=t.map(function(e){return new URL(e,self.location).toString()}),c=function(){caches.open(n).then(function(e){return e.keys().then(function(t){t.forEach(function(t){-1===s.indexOf(t.url)&&e.delete(t)})})})}
+self.addEventListener("install",function(e){e.waitUntil(caches.open(n).then(function(e){return Promise.all(s.map(function(t){var n=new Request(t,{mode:"cors"})
+return fetch(n).then(function(n){if(n.status>=400)throw new Error("Request for "+t+" failed with status "+n.statusText)
+return e.put(t,n)}).catch(function(e){console.error("Not caching "+t+" due to "+e)})}))}))}),self.addEventListener("activate",function(t){t.waitUntil(Promise.all([e("esw-asset-cache",n),c()]))}),self.addEventListener("fetch",function(e){var t="GET"===e.request.method,c=-1!==s.indexOf(e.request.url)
+t&&c&&e.respondWith(caches.match(e.request,{cacheName:n}).then(function(t){return t||fetch(e.request)}))})
+var a=new URL("index.html",self.location).toString()
+self.addEventListener("install",function(e){e.waitUntil(fetch(a,{credentials:"include"}).then(function(e){return caches.open("esw-index-1").then(function(t){return t.put(a,e)})}))}),self.addEventListener("activate",function(t){t.waitUntil(e("esw-index","esw-index-1"))}),self.addEventListener("fetch",function(e){var t=e.request,n="GET"===t.method,s=-1!==t.headers.get("accept").indexOf("text/html"),c=new URL(t.url).origin===location.origin
+n&&s&&c&&e.respondWith(caches.match(a,{cacheName:"esw-index-1"}))})})()
