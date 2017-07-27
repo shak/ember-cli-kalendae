@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-kalendae",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ember CLI for the Kalendae JS Datepicker",
   "keywords": [
     "ember-addon",
