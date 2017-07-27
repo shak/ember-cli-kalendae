@@ -2,7 +2,8 @@
 'use strict';
 var path = require('path');
 var Funnel = require('broccoli-funnel');
-// see https://github.com/miguelcobain/ember-leaflet/blob/master/index.js
+var mergeTrees = require('broccoli-merge-trees');
+
 module.exports = {
   name: 'ember-cli-kalendae',
   getConfig(app) {
@@ -17,33 +18,34 @@ module.exports = {
     const config = this.getConfig(app);
 
     if (config.includeKalendae) {
-      const kalendaePath = path.join(this.app.project.root, 'node_modules', 'kalendae', 'build');
-
       if (config.includeMoment) {
-        app.import(path.join(this.app.project.root, 'node_modules', 'moment', 'min', 'moment.min.js'));
+        app.import('vendor/moment/moment.min.js');
       }
 
       if (config.useStandalone) {
-        app.import(path.join(kalendaePath, 'kalendae.standalone.min.js'));
+        app.import('vendor/kalendae/kalendae.standalone.min.js');
       } else {
-        app.import(path.join(kalendaePath, 'kalendae.min.js'));
+        app.import('vendor/kalendae/kalendae.min.js');
       }
     }
 
     if (config.includeStyles) {
-      // include the css from vendor where it has already been exported to
-      app.import(path.join('vendor/kalendae.css'));
+      app.import('vendor/kalendae/kalendae.css');
     }
   },
 
-  treeForStyles() {
-    const config = this.getConfig(this.app);
+  treeForVendor() {
+    const a = new Funnel(path.join(this.app.project.root, 'node_modules', 'kalendae', 'build'), {
+      files: ['kalendae.min.js', 'kalendae.css', 'kalendae.standalone.min.js'],
+      destDir: 'kalendae'
+    });
 
-    if (config.includeStyles) {
-      return new Funnel(path.join(this.app.project.root, 'node_modules', 'kalendae', 'build'), {
-        files: ['kalendae.css'],
-        destDir: 'vendor'
-      });
-    }
+    const b = new Funnel(path.join(this.app.project.root, 'node_modules', 'moment', 'min'), {
+      files: ['moment.min.js'],
+      destDir: 'moment'
+    });
+
+
+    return mergeTrees([a, b]);
   }
 };

@@ -5,14 +5,14 @@
 <form>
   <div class="inline-parent">
     <fieldset class="inline-child">
-      <label>Start Date</label>
+      <label for="calendar1">Start Date</label>
       {{input
         placeholder="Click to select start date"
         focus-in=(action "showCalendar" "showCalendar1")
         focus-out=(action "hideCalendar" "showCalendar1")
         value=selectedValue1
         readonly=true
-        name='calendar1'
+        id='calendar1'
       }}
       {{#if showCalendar1}}
         {{ember-kalendae
@@ -24,14 +24,14 @@
     </fieldset>
 
     <fieldset class="inline-child">
-      <label>End Date</label>
+      <label for="calendar2">End Date</label>
       {{input
         placeholder="Click to select end date"
         focus-in=(action "showCalendar" "showCalendar2")
         focus-out=(action "hideCalendar" "showCalendar2")
         value=selectedValue2
         readonly=true
-        name='calendar2'
+        id='calendar2'
       }}
       {{#if showCalendar2}}
         {{ember-kalendae

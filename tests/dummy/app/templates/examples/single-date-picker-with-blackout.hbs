@@ -7,14 +7,14 @@
 <form>
   <div class="inline-parent">
     <fieldset class="inline-child">
-      <label>Start Date</label>
+      <label for="startDate">Start Date</label>
       {{input
         placeholder="Click to select start date"
         focus-in=(action "showCalendar" "startDatePicker")
         focus-out=(action "hideCalendar" "startDatePicker")
         value=selectedStartDateFormatted
         readonly=true
-        name="startDate"
+        id="startDate"
       }}
       {{#if startDatePicker}}
         {{ember-kalendae
@@ -27,14 +27,14 @@
     </fieldset>
 
     <fieldset class="inline-child">
-      <label>End Date</label>
+      <label for="endDate">End Date</label>
       {{input
         placeholder="Click to select end date"
         focus-in=(action "showCalendar" "endDatePicker")
         focus-out=(action "hideCalendar" "endDatePicker")
         value=selectedEndDateFormatted
         readonly=true
-        name="endDate"
+        id="endDate"
       }}
       {{#if endDatePicker}}
         {{ember-kalendae
@@ -84,7 +84,7 @@ export default Controller.extend({
 
     onStartDateDidChange(date) {
       this.set('selectedStartDate', date.toDate());
-      this.set('selectedStartDateFormatted', date.format('do of MMMM YYYY'));
+      this.set('selectedStartDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
           this.set('selectedEndDate', this.get('selectedStartDate'));
@@ -97,7 +97,7 @@ export default Controller.extend({
 
     onEndDateDidChange(date) {
       this.set('selectedEndDate', date.toDate());
-      this.set('selectedEndDateFormatted', date.format('do of MMMM YYYY'));
+      this.set('selectedEndDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
           this.send('hideCalendar', 'endDatePicker');
@@ -115,7 +115,7 @@ export default Controller.extend({
   placeholder="Click to select start date"
   value=selectedStartDateFormatted
   readonly=true
-  name="startDate"
+  id="startDate"
 }}
 \{{ember-kalendae
   onDidChange=(action "onStartDateDidChange")
@@ -129,7 +129,7 @@ export default Controller.extend({
   placeholder="Click to select end date"
   value=selectedEndDateFormatted
   readonly=true
-  name="endDate"
+  id="endDate"
 }}
 \{{ember-kalendae
   onDidChange=(action "onEndDateDidChange")

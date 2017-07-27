@@ -41,7 +41,7 @@ export default Controller.extend({
 
     onStartDateDidChange(date) {
       this.set('selectedStartDate', date.toDate());
-      this.set('selectedStartDateFormatted', date.format('do of MMMM YYYY'));
+      this.set('selectedStartDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
           this.set('selectedEndDate', this.get('selectedStartDate'));
@@ -55,7 +55,7 @@ export default Controller.extend({
 
     onEndDateDidChange(date) {
       this.set('selectedEndDate', date.toDate());
-      this.set('selectedEndDateFormatted', date.format('do of MMMM YYYY'));
+      this.set('selectedEndDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
           this.send('hideCalendar', 'endDatePicker');

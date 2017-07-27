@@ -30,11 +30,11 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g phantomjs-prebuilt
+  - travis_retry npm install -g phantomjs-prebuilt
   - phantomjs --version
 
 install:
-  - yarn install
+  - travis_retry yarn install --pure-lockfile
 
 script:
   # Usually, it's ok to finish the test scenario without reverting
