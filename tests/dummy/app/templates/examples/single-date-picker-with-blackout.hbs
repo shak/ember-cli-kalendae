@@ -67,7 +67,9 @@ export default Controller.extend({
     }
 
     if (query.date() &lt; date.getDate()) {
-      return true;
+      if (query.month() &lt;= date.getMonth()) {
+        return true;
+      }
     }
 
     return false;

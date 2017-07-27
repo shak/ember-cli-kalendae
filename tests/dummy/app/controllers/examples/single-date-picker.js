@@ -3,9 +3,8 @@ import jQuery from 'jquery';
 import { next } from '@ember/runloop';
 
 export default Controller.extend({
-  blah: 'test',
-  selected1: new Date(),
-  selected2: new Date(),
+  selectedStartDate: new Date(),
+  selectedEndDate: new Date(),
 
   actions: {
     showCalendar(calendar) {
@@ -16,24 +15,24 @@ export default Controller.extend({
       this.set(calendar, false);
     },
 
-    onDidChange1(date) {
-      this.set('selected1', date);
-      this.set('selectedValue1', date.format('YYYY-MM-DD'));
+    onStartDateDidChange(date) {
+      this.set('selectedStartDate', date.toDate());
+      this.set('selectedStartDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
-          this.send('hideCalendar', 'showCalendar1');
-          jQuery('input[name="calendar1"]').blur();
+          this.send('hideCalendar', 'startDatePicker');
+          jQuery('#startDate').blur();
         }
       );
     },
 
-    onDidChange2(date) {
-      this.set('selected2', date);
-      this.set('selectedValue2', date.format('YYYY-MM-DD'));
+    onEndDateDidChange(date) {
+      this.set('selectedEndDate', date.toDate());
+      this.set('selectedEndDateFormatted', date.format('Do of MMMM YYYY'));
       next(
         () => {
-          this.send('hideCalendar', 'showCalendar2');
-          jQuery('input[name="calendar2"]').blur();
+          this.send('hideCalendar', 'endDatePicker');
+          jQuery('#endDate').blur();
         }
       );
     }

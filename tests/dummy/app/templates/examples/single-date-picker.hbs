@@ -5,38 +5,38 @@
 <form>
   <div class="inline-parent">
     <fieldset class="inline-child">
-      <label for="calendar1">Start Date</label>
+      <label for="startDate">Start Date</label>
       {{input
         placeholder="Click to select start date"
-        focus-in=(action "showCalendar" "showCalendar1")
-        focus-out=(action "hideCalendar" "showCalendar1")
-        value=selectedValue1
+        focus-in=(action "showCalendar" "startDatePicker")
+        focus-out=(action "hideCalendar" "startDatePicker")
+        value=selectedStartDateFormatted
         readonly=true
-        id='calendar1'
+        id="startDate"
       }}
-      {{#if showCalendar1}}
+      {{#if startDatePicker}}
         {{ember-kalendae
-          onDidChange=(action "onDidChange1")
-          selected=selected1
+          onDidChange=(action "onStartDateDidChange")
+          selected=selectedStartDate
           class="float-calendar"
         }}
       {{/if}}
     </fieldset>
 
     <fieldset class="inline-child">
-      <label for="calendar2">End Date</label>
+      <label for="endDate">End Date</label>
       {{input
         placeholder="Click to select end date"
-        focus-in=(action "showCalendar" "showCalendar2")
-        focus-out=(action "hideCalendar" "showCalendar2")
-        value=selectedValue2
+        focus-in=(action "showCalendar" "endDatePicker")
+        focus-out=(action "hideCalendar" "endDatePicker")
+        value=selectedEndDateFormatted
         readonly=true
-        id='calendar2'
+        id="endDate"
       }}
-      {{#if showCalendar2}}
+      {{#if endDatePicker}}
         {{ember-kalendae
-          onDidChange=(action "onDidChange2")
-          selected=selected2
+          onDidChange=(action "onEndDateDidChange")
+          selected=selectedEndDate
           class="float-calendar"
         }}
       {{/if}}
