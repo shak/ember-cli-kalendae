@@ -7,21 +7,7 @@ export default Controller.extend({
   selectedEndDate: new Date(),
 
   isDateBefore(query, date) {
-    if (query.year() < date.getFullYear()) {
-      return true;
-    }
-
-    if (query.month() < date.getMonth()) {
-      return true;
-    }
-
-    if (query.date() < date.getDate()) {
-      if (query.month() <= date.getMonth()) {
-        return true;
-      }
-    }
-
-    return false;
+    return query.toDate().getTime() < date.getTime();
   },
 
   actions: {
