@@ -1,4 +1,6 @@
 {
   "short_name": "CLIKalendae",
-  "name": "Ember CLI Kalendae"
+  "name": "Ember CLI Kalendae",
+  "background_color": "#f7f6f3",
+  "theme_color": "#d6d6d5"
 }

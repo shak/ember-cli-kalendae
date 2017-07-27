@@ -5,7 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ember CLI Kalendae</title>
     <meta name="description" content="">
+    <meta name="theme-color" content="#d6d6d5">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <noscript>
+      <style>
+        body {
+          text-align: center;
+          padding: 10%;
+        }
+      </style>
+    </noscript>
 
     {{content-for "head"}}
 
@@ -23,5 +32,15 @@
     <script src="{{rootURL}}assets/dummy.js"></script>
 
     {{content-for "body-footer"}}
+
+    <noscript>
+      <h1>Javascript not enabled!</h1>
+      <p>Please note you need to enable javascript to run this website.</p>
+      <p>You can still access documentation for Ember CLI Kalendae on Github by clicking <a rel="noopener" target="_blank" href="https://github.com/shak/ember-cli-kalendae">here</a>
+      <p class="social">
+        <a class="no-line" href="https://github.com/shak" rel="noopener" target="_blank"><img alt="github logo"src="assets/img/github.png"/> @shak</a> &nbsp;&nbsp;
+        <a class="no-line" href="https://twitter.com/shahrukhomar" rel="noopener" target="_blank"><img alt="twitter logo" src="assets/img/twitter.png"/> @shahrukhomar</a>
+      </p>
+    </noscript>
   </body>
 </html>
