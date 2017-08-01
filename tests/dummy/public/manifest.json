@@ -5,7 +5,7 @@
   "display": "standalone",
   "start_url": ".",
   "background_color": "#f7f6f3",
-  "theme_color": "#ff7a4d",
+  "theme_color": "#366b8f",
   "icons": [
     {
       "src": "/assets/img/tomster192.png",
