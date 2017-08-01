@@ -49,82 +49,8 @@
 </form>
 
 <h3>Code Example</h3>
-{{#controller-code}}
-import Controller from '@ember/controller';
-import { next } from '@ember/runloop';
+<p class="message green"><b>Controller.js</b></p>
+{{ember-gisty user="shak" gist="d4734a52bf255f6def415ac437ef52b5" filename="controller.js"}}
 
-export default Controller.extend({
-  selectedStartDate: new Date(),
-  selectedEndDate: new Date(),
-
-  isDateBefore(query, date) {
-    return query.toDate().getTime() &lt; date.getTime();
-  },
-
-  actions: {
-    isStartDateBlocked(date) {
-      return this.isDateBefore(date, new Date());
-    },
-
-    isEndDateBlocked(date) {
-      return this.isDateBefore(date, this.get('selectedStartDate'));
-    },
-
-    onStartDateDidChange(date) {
-      this.set('selectedStartDate', date.toDate());
-      this.set('selectedStartDateFormatted', date.format('Do of MMMM YYYY'));
-      next(
-        () => {
-          this.set('selectedEndDate', this.get('selectedStartDate'));
-          this.set('selectedEndDateFormatted', this.get('selectedStartDateFormatted'));
-
-          this.send('hideCalendar', 'startDatePicker');
-        }
-      );
-    },
-
-    onEndDateDidChange(date) {
-      this.set('selectedEndDate', date.toDate());
-      this.set('selectedEndDateFormatted', date.format('Do of MMMM YYYY'));
-      next(
-        () => {
-          this.send('hideCalendar', 'endDatePicker');
-        }
-      );
-    }
-  }
-});
-{{/controller-code}}
-{{#template-code}}
-...
-
-// start date picker
-\{{input
-  placeholder="Click to select start date"
-  value=selectedStartDateFormatted
-  readonly=true
-  id="startDate"
-}}
-\{{ember-kalendae
-  onDidChange=(action "onStartDateDidChange")
-  selected=selectedStartDate
-  class="float-calendar"
-  blackout=(action "isStartDateBlocked")
-}}
-
-// end date picker
-\{{input
-  placeholder="Click to select end date"
-  value=selectedEndDateFormatted
-  readonly=true
-  id="endDate"
-}}
-\{{ember-kalendae
-  onDidChange=(action "onEndDateDidChange")
-  selected=selectedEndDate
-  class="float-calendar"
-  blackout=(action "isEndDateBlocked")
-}}
-
-...
-{{/template-code}}
+<p class="message blue"><b>Template.hbs</b></p>
+{{ember-gisty user="shak" gist="d4734a52bf255f6def415ac437ef52b5" filename="template.hbs"}}

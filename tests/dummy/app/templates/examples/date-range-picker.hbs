@@ -23,36 +23,8 @@
 </form>
 
 <h3>Code Example</h3>
-{{#controller-code}}
-import Controller from '@ember/controller';
+<p class="message green"><b>Controller.js</b></p>
+{{ember-gisty user="shak" gist="08d917c188d9d8e97a826162d28d5d10" filename="controller.js"}}
 
-export default Controller.extend({
-  actions: {
-    onChange(date, selected) {
-      if (selected.length > 1) {
-        return this.set('selectedDateFormatted', `${selected[0].format('Do of MMMM YYYY')} to ${selected[1].format('Do of MMMM YYYY')}`);
-      }
-
-      this.set('selectedDateFormatted', null);
-    }
-  }
-});
-{{/controller-code}}
-{{#template-code}}
-...
-
-\{{input
-  placeholder="No date range selected"
-  value=selectedDateFormatted
-  readonly=true
-  id="dateRange"
-}}
-\{{ember-kalendae
-  mode="range"
-  months=2
-  onDidChange=(action "onChange")
-  selected=selectedDate
-}}
-
-...
-{{/template-code}}
+<p class="message blue"><b>Template.hbs</b></p>
+{{ember-gisty user="shak" gist="08d917c188d9d8e97a826162d28d5d10" filename="template.hbs"}}

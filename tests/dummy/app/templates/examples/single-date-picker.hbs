@@ -45,26 +45,8 @@
 </form>
 
 <h3>Code Example</h3>
-{{#controller-code}}
-import Controller from '@ember/controller';
-export default Controller.extend({
-  selectedDate: new Date(), // set initial date selection to today
-  actions: {
-    onDidChange(date) {
-      this.set('selectedDate', date); // save raw for use with Kalendae plugin
-      this.set('selectedFormatted', date.format('YYYY-MM-DD')); // format for display
-    }
-  }
-});
-{{/controller-code}}
-{{#template-code}}
-...
+<p class="message green"><b>Controller.js</b></p>
+{{ember-gisty user="shak" gist="ca8aa7061ab4fd6b70492e8eaf19addb" filename="controller.js"}}
 
-\{{input value=selectedFormatted}}
-\{{ember-kalendae
-  onDidChange=(action "onDidChange")
-  selected=selectedDate
-}}
-
-...
-{{/template-code}}
+<p class="message blue"><b>Template.hbs</b></p>
+{{ember-gisty user="shak" gist="ca8aa7061ab4fd6b70492e8eaf19addb" filename="template.hbs"}}
