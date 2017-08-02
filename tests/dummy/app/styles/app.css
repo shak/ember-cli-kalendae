@@ -48,6 +48,10 @@ header {
   padding: 5%;
 }
 
+footer {
+  color: #8f8f8f;
+}
+
 .btn--group a.btn:hover {
   background-color: #d6d6d5;
   color: #46462d;
