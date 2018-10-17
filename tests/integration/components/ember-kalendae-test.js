@@ -11,10 +11,10 @@ module('Integration | Component | ember kalendae', function(hooks) {
 
     await render(hbs`
       {{#ember-kalendae}}
-        template block text
+        <p>template block text</p>
       {{/ember-kalendae}}
     `);
-    assert.ok(find('*').textContent.trim().indexOf('template block text') >= 0);
+    assert.dom('p').hasText('template block text');
   });
 
   test('it initialises correctly without any config', async function(assert) {
