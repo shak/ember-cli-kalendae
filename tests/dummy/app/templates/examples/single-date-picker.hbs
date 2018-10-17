@@ -12,7 +12,7 @@
         focus-out=(action "hideCalendar" "startDatePicker")
         value=selectedStartDateFormatted
         readonly=true
-        id="startDate"
+        class="start-date"
       }}
       {{#if startDatePicker}}
         {{ember-kalendae
@@ -31,7 +31,7 @@
         focus-out=(action "hideCalendar" "endDatePicker")
         value=selectedEndDateFormatted
         readonly=true
-        id="endDate"
+        class="end-date"
       }}
       {{#if endDatePicker}}
         {{ember-kalendae
@@ -46,7 +46,16 @@
 
 <h3>Code Example</h3>
 <p class="message green"><b>Controller.js</b></p>
-{{ember-gisty user="shak" gist="ca8aa7061ab4fd6b70492e8eaf19addb" filename="controller.js"}}
+{{ember-gisty
+  user="shak"
+  gist="ca8aa7061ab4fd6b70492e8eaf19addb"
+  filename="controller.js"
+}}
 
 <p class="message blue"><b>Template.hbs</b></p>
-{{ember-gisty user="shak" gist="ca8aa7061ab4fd6b70492e8eaf19addb" filename="template.hbs"}}
+{{ember-gisty
+  user="shak"
+  gist="ca8aa7061ab4fd6b70492e8eaf19addb"
+  filename="template.hbs"
+}}
+

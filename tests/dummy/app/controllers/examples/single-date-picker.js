@@ -1,10 +1,18 @@
 import Controller from '@ember/controller';
-import jQuery from 'jquery';
 import { next } from '@ember/runloop';
 
 export default Controller.extend({
-  selectedStartDate: new Date(),
-  selectedEndDate: new Date(),
+  selectedStartDate: null,
+  selectedEndDate: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.setProperties({
+      selectedStartDate: new Date(),
+      selectedEndDate: new Date()
+    });
+  },
 
   actions: {
     showCalendar(calendar) {
@@ -21,7 +29,7 @@ export default Controller.extend({
       next(
         () => {
           this.send('hideCalendar', 'startDatePicker');
-          jQuery('#startDate').blur();
+          document.querySelector('.start-date').blur();
         }
       );
     },
@@ -32,7 +40,7 @@ export default Controller.extend({
       next(
         () => {
           this.send('hideCalendar', 'endDatePicker');
-          jQuery('#endDate').blur();
+          document.querySelector('.end-date').blur();
         }
       );
     }
