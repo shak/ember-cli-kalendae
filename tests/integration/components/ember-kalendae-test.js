@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find } from '@ember/test-helpers';
+import { render, find, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import TriggerEvent from '../../helpers/ember-kalendae/trigger-event';
 
 module('Integration | Component | ember kalendae', function(hooks) {
   setupRenderingTest(hooks);
@@ -35,7 +34,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
     assert.expect(1);
 
     this.set('onDateClicked', (date) => {
-      const expected = this.$().find('.k-active:first').data('date');
+      const expected = find('.k-active').getAttribute('data-date');
       assert.equal(
         date.format('YYYY-MM-DD'),
         expected
@@ -43,14 +42,14 @@ module('Integration | Component | ember kalendae', function(hooks) {
     });
 
     await render(hbs`{{ember-kalendae onDateClicked=(action onDateClicked)}}`);
-    TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
+    click('.k-active');
   });
 
   test('it triggers changed event correctly and passes the selected date through', async function(assert) {
     assert.expect(1);
 
     this.set('onDidChange', (date) => {
-      const expected = this.$().find('.k-active:first').data('date');
+      const expected = find('.k-active').getAttribute('data-date');
 
       assert.equal(
         date.format('YYYY-MM-DD'),
@@ -59,7 +58,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
     });
 
     await render(hbs`{{ember-kalendae onDidChange=(action onDidChange)}}`);
-    TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
+    click('.k-active');
   });
 
   test('it triggers changed event correctly and passes all the selected dates through', async function(assert) {
@@ -69,7 +68,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
       if (raw.length > 1) {
         assert.equal(
           raw[0].format('YYYY-MM-DD'),
-          this.$().find('.k-active:first').data('date')
+          find('.k-active').getAttribute('data-date')
         );
 
         assert.equal(
@@ -80,7 +79,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
     });
 
     await render(hbs`{{ember-kalendae mode='range' onDidChange=(action onDidChange)}}`);
-    TriggerEvent(this.$().find('.k-active:first')[0], 'mousedown');
+    click('.k-active');
   });
 
   test('it triggers view changed event correctly and passes new view through', async function(assert) {
@@ -94,7 +93,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
     });
 
     await render(hbs`{{ember-kalendae onDidViewChanged=(action onDidViewChanged)}}`);
-    TriggerEvent(this.$().find('.k-btn-next-month')[0], 'mousedown');
+    click('.k-btn-next-month');
   });
 
   test('it passes mode through to kalendae correctly', async function(assert) {
@@ -423,7 +422,7 @@ module('Integration | Component | ember kalendae', function(hooks) {
   test('it passes selected through to kalendae correctly', async function(assert) {
     assert.expect(1);
 
-    this.set('selected', null);
+    this.set('selected', false);
 
     await render(hbs`
       {{ember-kalendae
