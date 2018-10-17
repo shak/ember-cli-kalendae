@@ -1,12 +1,8 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
-import { computed } from '@ember/object';
 import isFunction from '../utils/is-function';
-import layout from '../templates/components/ember-kalendae';
 
 export default Component.extend({
-  layout,
-
   mode: 'single',
   months: '1',
   weekStart: '0',
@@ -14,7 +10,7 @@ export default Component.extend({
   directionScrolling: true,
   blackout: null,
   viewStartDate: null,
-  dateClassMap: {},
+  dateClassMap: null,
   dayOutOfMonthClickable: false,
   dayHeaderClickable: false,
   useYearNav: true,
@@ -26,19 +22,15 @@ export default Component.extend({
   parseSplitDelimiter: /,\s*|\s*-\s*/,
   rangeDelimiter: ' - ',
   multipleDelimiter: ', ',
-  selected: new Date(),
+  selected: null,
 
   /**
    * Returns current kalendae instance
    *
    * @property kalendae
-   * @type Object | undefined Returns undefined if kalendae not found
+   * @type Object | null Returns undefined if kalendae not found
    */
-  kalendae: computed({
-    get() {
-      return this.$().data('kalendae');
-    }
-  }).volatile(),
+  kalendae: null,
 
   /**
    * @protected
@@ -46,6 +38,14 @@ export default Component.extend({
    */
   init() {
     this._super(...arguments);
+
+    if (this.get('selected') === null) {
+      this.set('selected', new Date());
+    }
+
+    if (this.get('dateClassMap') === null) {
+      this.set('dateClassMap', {});
+    }
 
     scheduleOnce('afterRender', this, 'initKalendae');
   },
@@ -57,7 +57,8 @@ export default Component.extend({
    * @method initKalendae
    */
   initKalendae() {
-    this.$().kalendae(
+    const instance = new window.Kalendae(
+      this.element,
       this.getProperties(
         'mode',
         'months',
@@ -82,7 +83,8 @@ export default Component.extend({
       )
     );
 
-    this.buildSubscriptions(this.get('kalendae'));
+    this.set('kalendae', instance);
+    this.buildSubscriptions(instance);
   },
 
   /**
