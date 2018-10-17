@@ -4,7 +4,7 @@ var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
 
 module.exports = {
-  name: require('./package').name
+  name: require('./package').name,
   getConfig(app) {
     const options = typeof app.options === 'object' ? app.options : {};
 
