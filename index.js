@@ -1,11 +1,10 @@
-/* eslint-env node */
 'use strict';
 var path = require('path');
-var Funnel = require('broccoli-funnel');
-var mergeTrees = require('broccoli-merge-trees');
+var Funnel = require('broccoli-funnel'); // eslint-disable-line node/no-extraneous-require
+var mergeTrees = require('broccoli-merge-trees'); // eslint-disable-line node/no-extraneous-require
 
 module.exports = {
-  name: 'ember-cli-kalendae',
+  name: require('./package').name,
   getConfig(app) {
     const options = typeof app.options === 'object' ? app.options : {};
 

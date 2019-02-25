@@ -1,4 +1,4 @@
-# ember-cli-kalendae 
+# ember-cli-kalendae
 
 [![Build Status](https://travis-ci.org/shak/ember-cli-kalendae.svg?branch=master)](https://travis-ci.org/shak/ember-cli-kalendae)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-kalendae.svg)](https://emberobserver.com/addons/ember-cli-kalendae)
@@ -84,22 +84,22 @@ Will set the mode to `range` and display `2` calendar panes for months.
 This component exposes all standard [Kalendae events](https://github.com/ChiperSoft/Kalendae#kalendae-events) as Ember actions.
 
 #### `onDidChange`
-  
+
 Triggered by Kalendae `change` event. The action is passed the following args:
-  
+
   * `dateLastClicked (moment)`
   * `selectedDates (Array)`
 
 #### `onDateClicked`
 
 Triggered by Kalendae `date-clicked` event. The action is passed the following args:
-  
+
   * `dateLastClicked (moment)`
 
 #### `onDidViewChanged`
 
 Triggered by Kalendae `view-changed` event. The action is passed the following args:
-  
+
    * `clickedButtonLabel (String)`
 
 Pass closured action into `ember-cli-kalendae` in the template.
@@ -146,4 +146,3 @@ The component also yields kalendae instance i.e.:
 ## License
 
 ember-cli-kalendae is released under an MIT license and is freely distributable.
-
